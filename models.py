@@ -3,7 +3,6 @@ from django.db import models
 
 
 class Restaurant(models.Model):
-    id_restaurant = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     open_current_day = models.CharField(max_length=10)
     is_active = models.BooleanField
@@ -19,7 +18,6 @@ class Restaurant(models.Model):
 
 class Meal(models.Model):
     restaurant = models.ForeignKey(Restaurant)
-    id_meal = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     is_active = models.BooleanField
     is_vege = models.BooleanField
@@ -29,8 +27,7 @@ class Meal(models.Model):
 
 
 class Ingridients(models.Model):
-    id_ingridient = models.AutoField(primary_key=True)
-    id_meal = models.models.ManyToManyField(IdMeal, through='Meal')
+    meal = models.ForeignKey(Meal)
     name = models.CharField(max_length=50)
     is_active = models.BooleanField
 
@@ -39,7 +36,6 @@ class Ingridients(models.Model):
 
 
 class Comments(models.Model):
-    id_comment = models.AutoField(primary_key=True)
     content = models.CharField(max_length=255)
     spice_rate = models.DecimalField(max_digits=5, decimal_places=1)
     rank = models.DecimalField(max_digits=5, decimal_places=1)
